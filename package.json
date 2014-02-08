@@ -1,0 +1,46 @@
+{
+  "name": "tweet-your-bracket",
+  "version": "0.0.0",
+  "author": "Luke Karrys",
+  "dependencies": {
+    "andlog": "~0.0.4",
+    "async": "~0.2.10",
+    "backbone": "1.0.0",
+    "clientconfig": "~0.0.4",
+    "express": "3.x.x",
+    "favicon-setter": "~0.1.1",
+    "getconfig": "~0.3.0",
+    "human-model": "~2.6.0",
+    "human-view": "~1.6.0",
+    "human-view-switcher": "~0.0.1",
+    "jade": "1.x.x",
+    "jquery": "~2.1.0",
+    "moonboots": "1.x.x",
+    "simplewebrtc": "~1.1.1",
+    "templatizer": "~0.2.9",
+    "underscore": "~1.5.2",
+    "less": "~1.6.2",
+    "rmrf": "~1.0.2",
+    "mkdirp": "~0.3.5"
+  },
+  "devDependencies": {
+    "precommit-hook": "~0.3.8"
+  },
+  "jshintConfig": {
+    "asi": false,
+    "browser": true,
+    "curly": false,
+    "expr": true,
+    "indent": 4,
+    "loopfunc": true,
+    "node": true,
+    "trailing": true,
+    "undef": true,
+    "white": true
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node server.js --build"
+  }
+}
