@@ -72,6 +72,13 @@ module.exports = HumanModel.define({
             fn: function () {
                 return this.history.length > 0 && this.historyIndex < this.history.length - 1;
             }
+        },
+        hasHistory: {
+            deps: ['history', 'historyIndex'],
+            cache: true,
+            fn: function () {
+                return this.history.length > 1;
+            }
         }
     },
     updateBracket: function (bracket) {
@@ -107,5 +114,9 @@ module.exports = HumanModel.define({
     },
     last: function () {
         this.historyIndex = this.history.length - 1;
+    },
+    reset: function () {
+        this.historyIndex = 0;
+        this.history = [bd.constants.EMPTY];
     }
 });

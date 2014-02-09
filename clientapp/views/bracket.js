@@ -12,7 +12,7 @@ module.exports = HumanView.extend({
     },
     initialize: function () {
         this.listenTo(this.model, 'change:ordered change:historyIndex', this.render);
-        this.listenTo(this.model, 'change:canRewind change:canFastForward', this.updateNav);
+        this.listenTo(this.model, 'change:canRewind change:canFastForward change:hasHistory', this.updateNav);
         this.listenTo(this.model, 'change:history change:historyIndex', this.updateHistory);
     },
     render: function () {
@@ -35,7 +35,7 @@ module.exports = HumanView.extend({
         this.model[$(e.currentTarget).attr('role')]();
     },
     updateNav: function () {
-        this.getByRole('nav').innerHTML = this.template.nav(this.model.canRewind, this.model.canFastForward);
+        this.getByRole('nav').innerHTML = this.template.nav(this.model);
     },
     updateHistory: function () {
         app.localStorage('history', this.model.history);

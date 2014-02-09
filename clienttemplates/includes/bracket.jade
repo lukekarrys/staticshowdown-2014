@@ -44,7 +44,10 @@ mixin regions(regions)
     mixin region(regions[regions.length-1])
 
 
-mixin nav(canRewind, canFastForward)
+mixin nav(model)
+  - var canRewind = model.canRewind
+  - var canFastForward = model.canFastForward
+  - var hasHistory = model.hasHistory
   - if (typeof canRewind !== 'undefined')
     ul.nav.nav-pills(role="nav")
       li(class=canRewind ? '' : 'disabled')
@@ -59,8 +62,10 @@ mixin nav(canRewind, canFastForward)
       li(class=canFastForward ? '' : 'disabled')
         a(href="#", role="last")
           span.glyphicon.glyphicon-fast-forward
-
+      li(class=hasHistory ? '' : 'disabled')
+        a(href="#", role="reset")
+          span.glyphicon.glyphicon-ban-circle
 .row
   .bracket(data-bracket=bracket.flat, role='bracket')
-    mixin nav(bracket.canRewind, bracket.canFastForward)
+    mixin nav(bracket)
     mixin regions(bracket.ordered)

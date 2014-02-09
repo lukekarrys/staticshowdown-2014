@@ -52,6 +52,8 @@
   "scripts": {
     "local": "./node_modules/.bin/nodemon -e js,json,jade server.js",
     "build": "node server.js --build",
-    "deploy": "npm run build && divshot push"
+    "deploy": "npm run build && divshot push",
+    "staging": "npm run build && divshot push staging",
+    "production": "npm run build && divshot push production"
   }
 }
