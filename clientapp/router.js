@@ -65,6 +65,7 @@ module.exports = Backbone.Router.extend({
 
     collaborate: function (room) {
         this.trigger('newPage', new CollabPage({
+            roomId: room,
             model: new InstantBracket({
                 roomId: room
             })

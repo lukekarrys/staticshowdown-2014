@@ -40,4 +40,54 @@ th[role] {
     }
 }
 
+
+.collaborate-page {
+
+    .videos {
+        height: 0px;
+    }
+
+    &.has-videos {
+        .bracket {
+            padding-top: 69px;
+        }
+
+        .videos {
+            .clearfix();
+            position: fixed;
+            top: 42px;
+            right: 0px;
+            width: 100%;
+            padding: 7.5px;
+            background: @navbar-default-bg;
+            border-bottom: 1px solid @navbar-default-border;
+            height: 157px;
+            z-index: 100;
+            &.affix {
+                top: 0px;
+            }
+        }
+
+        #localVideo {
+            margin-left: 0;
+        }
+
+        video {
+            outline: 0px;
+            height: 140px;
+            -webkit-transform: scaleX(-1);
+            float: left;
+            margin-left: 10px;
+        }
+
+        #remote {
+            float: left;
+        }
+    }
+
+
+
+
+}
+
 @import "bracket.less";

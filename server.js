@@ -42,7 +42,8 @@ var clientApp = new Moonboots({
         fixPath('clientapp/libraries/bootstrap/collapse.js'),
         fixPath('clientapp/libraries/bootstrap/dropdown.js'),
         fixPath('clientapp/libraries/bootstrap/modal.js'),
-        fixPath('clientapp/libraries/bootstrap/tooltip.js')
+        fixPath('clientapp/libraries/bootstrap/tooltip.js'),
+        fixPath('clientapp/libraries/bootstrap/affix.js')
     ],
     stylesheets: [
         fixPath('styles/app.css')
