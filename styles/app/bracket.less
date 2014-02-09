@@ -148,11 +148,12 @@
   @media (min-width: @screen-md-min) {
     .right-side {
       &, a.team, .region-name {
-        -webkit-transform: rotateY(180deg) translateZ(1px);
-        -webkit-transform-style: preserve-3d;
+        // Causes some games to be unclickable
+        // -webkit-transform: rotateY(180deg) translateZ(1px);
+        // -webkit-transform-style: preserve-3d;
       }
       a.team, .region-name {
-        text-align: right;
+        //text-align: right;
       }
     }
   }
