@@ -1,0 +1,15 @@
+.modal.fade(tabindex="-1", role="dialog")
+  .modal-dialog
+    form.modal-content
+      .modal-header
+        button(type="button", class="close", data-dismiss="modal") &times;
+        h3.modal-title Collaborate!
+
+      .modal-body.row
+        p.col-xs-12 Let your friends help with your bracket! Enter the name of the room that you'd like to create, and a URL will be set. Just send the URL to any friends and they will be able to follow along and help you pick your bracket.
+        .form-group.col-xs-12
+          input.form-control(type="text", placeholder="Room name...", name="roomId", id="dateTo")
+
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+        a.btn.btn-primary(type="submit", data-dismiss="modal", href="/collaborate/demo") I Want To Go To There

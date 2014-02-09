@@ -45,19 +45,20 @@ mixin regions(regions)
 
 
 mixin nav(canRewind, canFastForward)
-  ul.nav.nav-pills(role="nav")
-    li(class=canRewind ? '' : 'disabled')
-      a(href="#", role="first")
-        span.glyphicon.glyphicon-fast-backward
-    li(class=canRewind ? '' : 'disabled')
-      a(href="#", role="previous")
-        span.glyphicon.glyphicon-step-backward
-    li(class=canFastForward ? '' : 'disabled')
-      a(href="#", role="next")
-        span.glyphicon.glyphicon-step-forward
-    li(class=canFastForward ? '' : 'disabled')
-      a(href="#", role="last")
-        span.glyphicon.glyphicon-fast-forward
+  - if (typeof canRewind !== 'undefined')
+    ul.nav.nav-pills(role="nav")
+      li(class=canRewind ? '' : 'disabled')
+        a(href="#", role="first")
+          span.glyphicon.glyphicon-fast-backward
+      li(class=canRewind ? '' : 'disabled')
+        a(href="#", role="previous")
+          span.glyphicon.glyphicon-step-backward
+      li(class=canFastForward ? '' : 'disabled')
+        a(href="#", role="next")
+          span.glyphicon.glyphicon-step-forward
+      li(class=canFastForward ? '' : 'disabled')
+        a(href="#", role="last")
+          span.glyphicon.glyphicon-fast-forward
 
 .row
   .bracket(data-bracket=bracket.flat, role='bracket')

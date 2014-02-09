@@ -2,11 +2,15 @@
 var Backbone = require('backbone');
 var HomePage = require('./pages/home');
 var CollabPage = require('./pages/collaborate');
+var ResultsPage = require('./pages/results');
 var _404Page = require('./pages/404');
 var Bracket = require('./models/bracket');
 var InstantBracket = require('./models/instantBracket');
+var Results = require('./collections/results');
 var BracketValidator = require('bracket-validator');
 var bd = new BracketValidator({year: '2013'});
+
+var data = require('./data/2013.json');
 
 
 module.exports = Backbone.Router.extend({
@@ -16,6 +20,8 @@ module.exports = Backbone.Router.extend({
         'bracket/:bracket': 'entry',
 
         'collaborate/:room': 'collaborate',
+
+        'results': 'results',
 
         '*path': '_404'
     },
@@ -44,6 +50,12 @@ module.exports = Backbone.Router.extend({
             model: new InstantBracket({
                 roomId: room
             })
+        }));
+    },
+
+    results: function () {
+        this.trigger('newPage', new ResultsPage({
+            collection: new Results(data.entries, {masters: data.masters}),
         }));
     },
 

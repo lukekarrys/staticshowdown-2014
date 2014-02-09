@@ -3,13 +3,17 @@ var ViewSwitcher = require('human-view-switcher');
 var _ = require('underscore');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
+var CollabDialog = require('./modal').extend({
+    template: templates.dialogs.collaborate
+});
 
 
 module.exports = HumanView.extend({
     template: templates.body,
     initialize: function () {},
     events: {
-        'click a[href]': 'handleLinkClick'
+        'click a[href]': 'handleLinkClick',
+        'click a[role="collaborate"]': 'handleCollaborateClick'
     },
     render: function () {
         // some additional stuff we want to add to the document head
@@ -56,5 +60,13 @@ module.exports = HumanView.extend({
             app.navigate(path);
             return false;
         }
+    },
+
+    handleCollaborateClick: function (e) {
+        e.preventDefault();
+
+
+
+        this.registerSubview(new CollabDialog().render());
     }
 });

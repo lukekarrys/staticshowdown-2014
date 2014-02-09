@@ -1,3 +1,18 @@
 @import url("//fonts.googleapis.com/css?family=Ubuntu");
 
+body {
+    counter-reset: rankCounter;
+}
+
+th[role] {
+    cursor: pointer;
+}
+
+.table .rank {
+    counter-increment: rankCounter;
+    &:before {
+        content: counter(rankCounter);
+    }
+}
+
 @import "bracket.less";

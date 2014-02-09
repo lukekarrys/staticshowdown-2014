@@ -16,7 +16,11 @@ module.exports = HumanModel.define({
         app.goinstant.room(this, this.roomId);
     },
     session: {
-        bracket: ['string', true, bd.constants.EMPTY],
+        bracket: {
+            required: true,
+            type: 'string',
+            default: bd.constants.EMPTY
+        },
         roomId: ['strng', true, '']
     },
     derived: {
@@ -86,10 +90,10 @@ module.exports = HumanModel.define({
         // Get shared for first time
         this.bracketKey.get(function (err, value, context) {
             logger.log('Get bracket', value);
-            self.bracket = value;
+            if (value) self.bracket = value;
             self.bracketKey.on('set', function (value, context) {
                 logger.log('Set bracket', value);
-                self.bracket = value;
+                if (value) self.bracket = value;
             });
         });
     },

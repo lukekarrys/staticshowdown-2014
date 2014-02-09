@@ -6,7 +6,7 @@
     "async": "~0.2.10",
     "backbone": "1.0.0",
     "bracket-generator": "~1.0.2",
-    "bracket-validator": "~1.0.5",
+    "bracket-validator": "~1.0.6",
     "clientconfig": "~0.0.4",
     "execSync": "~1.0.1-pre",
     "express": "3.x.x",
@@ -24,7 +24,8 @@
     "simplewebrtc": "~1.1.1",
     "templatizer": "~0.2.9",
     "underscore": "~1.5.2",
-    "bracket-updater": "~1.0.8"
+    "bracket-updater": "~1.0.8",
+    "bracket-scorer": "~1.0.1"
   },
   "devDependencies": {
     "precommit-hook": "~0.3.8"

@@ -1,0 +1,32 @@
+mixin nav(canRewind, canFastForward)
+  ul.nav.nav-pills(role="nav")
+    li(class=canRewind ? '' : 'disabled')
+      a(href="#", role="first")
+        span.glyphicon.glyphicon-fast-backward
+    li(class=canRewind ? '' : 'disabled')
+      a(href="#", role="previous")
+        span.glyphicon.glyphicon-step-backward
+    li(class=canFastForward ? '' : 'disabled')
+      a(href="#", role="next")
+        span.glyphicon.glyphicon-step-forward
+    li(class=canFastForward ? '' : 'disabled')
+      a(href="#", role="last")
+        span.glyphicon.glyphicon-fast-forward
+
+section.page.results
+    .results
+        mixin nav(results.canRewind(), results.canFastForward())
+        .table-responsive
+            table.table
+                thead
+                    th Rank
+                    th Username
+                    th Rd 1
+                    th Rd 2
+                    th S16
+                    th E8
+                    th FF
+                    th NC
+                    th(class="info", role="total") Total
+                    th(class="active", role="gooley") Gooley
+                tbody(role="results")
