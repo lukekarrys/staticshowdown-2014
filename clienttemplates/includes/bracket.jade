@@ -1,0 +1,65 @@
+mixin team(team)
+  - if (typeof team !== 'undefined')
+    li
+      - if (team)
+        - var classes = ['']
+        - team.eliminated && classes.push('eliminated')
+        - team.correct === true && classes.push('correct')
+        - team.correct === false && classes.push('incorrect')
+        - true && classes.push('pickable')
+        a.team(class=classes.join(' '), role='team', data-region=team.fromRegion, data-seed=team.seed, data-name=team.name, data-id=team.fromRegion + team.seed)
+          span.team (#{team.seed}) #{team.name}
+          - if (team.shouldBe)
+            span.should-be (#{team.shouldBe.seed}) #{team.shouldBe.name}
+      - else
+        a &nbsp;
+
+
+mixin matchups(team1, team2)
+  ul.matchup(role='matchup')
+    mixin team(team1)
+    mixin team(team2)
+
+
+mixin region(region)
+  section.clearfix.region(role='region', data-id=region.id, id='region-' + region.id)
+    h2.region-name= region.name
+    .matchups
+      - each round in region.rounds
+        .round
+          - for (var ii = 0, mm = round.length; ii < mm; ii += 2)
+            mixin matchups(round[ii], round[ii+1])
+
+
+mixin side(region1, region2, sideClass)
+  .col-md-6(class=sideClass)
+    mixin region(region1)
+    mixin region(region2)
+
+
+mixin regions(regions)
+  - for (var i = 0, m = regions.length - 1; i < m; i += 2)
+    mixin side(regions[i], regions[i+1], i === 0 ? 'left-side' : 'right-side')
+  .col-md-12
+    mixin region(regions[regions.length-1])
+
+
+mixin nav(canRewind, canFastForward)
+  ul.nav.nav-pills(role="nav")
+    li(class=canRewind ? '' : 'disabled')
+      a(href="#", role="first")
+        span.glyphicon.glyphicon-fast-backward
+    li(class=canRewind ? '' : 'disabled')
+      a(href="#", role="previous")
+        span.glyphicon.glyphicon-step-backward
+    li(class=canFastForward ? '' : 'disabled')
+      a(href="#", role="next")
+        span.glyphicon.glyphicon-step-forward
+    li(class=canFastForward ? '' : 'disabled')
+      a(href="#", role="last")
+        span.glyphicon.glyphicon-fast-forward
+
+.row
+  .bracket(data-bracket=bracket.flat, role='bracket')
+    mixin nav(bracket.canRewind, bracket.canFastForward)
+    mixin regions(bracket.ordered)

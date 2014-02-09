@@ -1,13 +1,15 @@
 /*global app, me, $*/
 var Backbone = require('backbone');
 var _ = require('underscore');
-var logger = require('andlog');
+var logger = require('./helpers/andlog');
 var config = require('clientconfig');
+var goinstant = require('./helpers/goinstant');
 
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
-var People = require('./models/people');
+var BracketData = require('bracket-generator');
+
 
 
 module.exports = {
@@ -18,10 +20,14 @@ module.exports = {
         _.extend(this, Backbone.Events);
 
         var self = window.app = this;
+        this.year = '2013';
+        this.bracketData = new BracketData({year: app.year});
 
-        // create our global 'me' object and an empty collection for our people models.
+        // create our global 'me' object
         window.me = new Me();
-        this.people = new People();
+
+        // Setup goinstant
+        this.goinstant = goinstant(this);
 
         // init our URL handlers and the history tracker
         this.router = new Router();
@@ -58,7 +64,7 @@ module.exports = {
     },
 
     localStorage: function (key, val) {
-        var localStorageKey = 'tweetyourbracket.' + me.userId();
+        var localStorageKey = 'tweetyourbracket.' + me.id;
         var storage = localStorage[localStorageKey] || '{}';
         var storageJSON;
 

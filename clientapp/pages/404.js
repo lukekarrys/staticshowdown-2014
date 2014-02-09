@@ -3,8 +3,8 @@ var templates = require('../templates');
 
 
 module.exports = PageView.extend({
-    pageTitle: 'more info',
-    template: templates.pages.info,
+    pageTitle: '404',
+    template: templates.pages._404,
     render: function () {
         this.renderAndBind();
     }
