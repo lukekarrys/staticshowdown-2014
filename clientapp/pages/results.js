@@ -20,6 +20,7 @@ module.exports = PageView.extend({
     changeHistory: function (e) {
         e.preventDefault();
         this.collection[$(e.currentTarget).attr('role')]();
+        this.$('.nav').html(this.template.nav(this.collection));
     },
     changeComparator: function (e) {
         var $target = $(e.currentTarget),

@@ -1,4 +1,5 @@
-mixin nav(canRewind, canFastForward)
+mixin nav(results)
+  - var canRewind = results.canRewind(), canFastForward = results.canFastForward()
   ul.nav.nav-pills(role="nav")
     li(class=canRewind ? '' : 'disabled')
       a(href="#", role="first")
@@ -15,7 +16,7 @@ mixin nav(canRewind, canFastForward)
 
 section.page.results
     .results
-        mixin nav(results.canRewind(), results.canFastForward())
+        mixin nav(results)
         .table-responsive
             table.table
                 thead
