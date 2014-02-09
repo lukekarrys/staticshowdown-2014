@@ -9,7 +9,9 @@ var logger = require('../helpers/andlog');
 module.exports = HumanModel.define({
     type: 'bracket',
     initialize: function (attributes, options) {
+        attributes || (attributes = {});
         options || (options = {});
+        this.hasInitial = !!attributes.bracket;
         this.room = options.room;
         this.listenTo(this, 'connect:room', this.onRoomConnect);
         this.listenTo(this, 'connect:error', this.onRoomError);
@@ -90,11 +92,18 @@ module.exports = HumanModel.define({
         // Get shared for first time
         this.bracketKey.get(function (err, value, context) {
             logger.log('Get bracket', value);
-            if (value) self.bracket = value;
+            if (value && !self.hasInitial) self.bracket = value;
+
+            if (self.hasInitial) {
+                self.bracketKey.set(self.bracket);
+                app.navigate(window.location.pathname.replace('/collaborate-set/', '/collaborate/'), {trigger: false, replace: true});
+            }
+
             self.bracketKey.on('set', function (value, context) {
                 logger.log('Set bracket', value);
                 if (value) self.bracket = value;
             });
+
         });
     },
     onRoomError: function () {

@@ -9,14 +9,12 @@ module.exports = BaseView.extend({
     template: templates.dialogs.collaborate,
     events: {
         'click [data-dismiss]': 'hideModal',
-        'keyup input': 'setButtonHref',
-        'submit form': 'setButtonHref'
+        'submit form': 'submitForm'
     },
-    setButtonHref: function (e) {
+    submitForm: function (e) {
         e.preventDefault();
-        this.$('.btn-primary').attr('href', '/collaborate/' + slugify(this.$('input').val()));
-        if (e.type === 'submit') {
-            this.$('.btn-primary').click();
-        }
+        var url = '/collaborate' + (this.$('[type=checkbox]').is(':checked') ? '-set' : '') + '/' + slugify(this.$('input').val());
+        this.modal.modal('hide');
+        app.navigate(url);
     }
 });

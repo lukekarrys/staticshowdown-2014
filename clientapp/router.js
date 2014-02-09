@@ -36,6 +36,7 @@ module.exports = Backbone.Router.extend({
         'bracket/:bracket': 'entry',
 
         'collaborate/:room': 'collaborate',
+        'collaborate-set/:room': 'collaborateSet',
 
         'results': 'results',
         'results/me': 'userResultsMe',
@@ -69,6 +70,20 @@ module.exports = Backbone.Router.extend({
             model: new InstantBracket({
                 roomId: room
             })
+        }));
+    },
+
+    collaborateSet: function (room) {
+        var history = app.localStorage('history') || [];
+        var historyIndex = app.localStorage('historyIndex') || 0;
+        var data = {roomId: room};
+        if (history[historyIndex]) {
+            data.bracket = history[historyIndex];
+        }
+        console.log(data)
+        this.trigger('newPage', new CollabPage({
+            roomId: room,
+            model: new InstantBracket(data)
         }));
     },
 
