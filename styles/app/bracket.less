@@ -131,6 +131,21 @@
     }
   }
 
+  #region-MW, #region-W, #region-E, #region-S {
+    &:after {
+      border-right: 1px solid #000;
+      position: absolute;
+      right: 0px;
+      height: 300px;
+      top: 0px;
+    }
+  }
+
+  #region-MW:after, #region-S:after {
+    top: 300px;
+    height: 303px;
+  }
+
   #region-FF .round {
     width: 33.3333333333%;
     &:nth-child(3) {

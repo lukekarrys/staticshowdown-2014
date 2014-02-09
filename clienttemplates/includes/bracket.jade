@@ -24,7 +24,7 @@ mixin matchups(team1, team2, pickable)
 mixin region(region, pickable)
   section.clearfix.region(role='region', data-id=region.id, id='region-' + region.id)
     h2.region-name= region.name
-    .matchups
+    .matchups.clearfix
       - each round in region.rounds
         .round
           - for (var ii = 0, mm = round.length; ii < mm; ii += 2)
@@ -32,7 +32,7 @@ mixin region(region, pickable)
 
 
 mixin side(region1, region2, sideClass, pickable)
-  .col-md-6(class=sideClass)
+  .col-md-6.clearfix(class=sideClass)
     mixin region(region1, pickable)
     mixin region(region2, pickable)
 
