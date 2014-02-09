@@ -3,9 +3,8 @@ var ViewSwitcher = require('human-view-switcher');
 var _ = require('underscore');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
-var CollabDialog = require('./modal').extend({
-    template: templates.dialogs.collaborate
-});
+var CollabDialog = require('./collaborate');
+var WelcomeModal = require('./wtf');
 
 
 module.exports = HumanView.extend({
@@ -37,6 +36,8 @@ module.exports = HumanView.extend({
             }
         });
 
+        this.welcomeModal();
+
         // setting a favicon for fun (note, it's dyanamic)
         setFavicon('/favicon.ico');
         return this;
@@ -64,9 +65,11 @@ module.exports = HumanView.extend({
 
     handleCollaborateClick: function (e) {
         e.preventDefault();
-
-
-
         this.registerSubview(new CollabDialog().render());
+    },
+    welcomeModal: function () {
+        if (app.localStorage('isNewUser') !== false && app.localStorage('isNewUser') !== "false") {
+            this.registerSubview(new WelcomeModal().render());
+        }
     }
 });

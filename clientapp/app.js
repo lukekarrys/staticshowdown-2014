@@ -81,6 +81,11 @@ module.exports = {
         } else if (key) {
             return storageJSON[key];
         }
+    },
+
+    __reset: function () {
+        var localStorageKey = 'tweetyourbracket.' + me.id;
+        localStorage[localStorageKey] = JSON.stringify({});
     }
 };
 

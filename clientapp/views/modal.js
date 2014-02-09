@@ -7,8 +7,6 @@ var BaseView = require('./base'),
 module.exports = BaseView.extend({
     events: {
         'click [data-dismiss]': 'hideModal',
-        'keyup input': 'setButtonHref',
-        'submit form': 'setButtonHref'
     },
     render: function () {
         this.renderAndBind();

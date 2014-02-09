@@ -18,19 +18,25 @@ module.exports = HumanModel.define({
                 return this.current.indexOf(bd.constants.UNPICKED_MATCH) === -1;
             }
         },
-        unpickedGames: {
-            deps: ['current'],
+        progressNow: {
+            deps: ['current', 'progressTotal'],
             cache: true,
             fn: function () {
-                return this.current.replace(new RegExp('[^' + bd.constants.UNPICKED_MATCH + ']', 'gi'), '').length;
+                return this.progressTotal - this.current.replace(new RegExp('[^' + bd.constants.UNPICKED_MATCH + ']', 'gi'), '').length;
             }
         },
-        percentDone: {
-            deps: ['unpickedGames'],
+        progressTotal: {
+            deps: [],
             cache: true,
             fn: function () {
-                var total = ((bd.constants.TEAMS_PER_REGION * bd.constants.REGION_COUNT) - 1);
-                return  (total - this.unpickedGames) / total;
+                return ((bd.constants.TEAMS_PER_REGION * bd.constants.REGION_COUNT) - 1);
+            }
+        },
+        percent: {
+            deps: ['progressTotal', 'progressNow'],
+            cache: true,
+            fn: function () {
+                return  (this.progressNow / this.progressTotal) * 100;
             }
         },
         validated: {

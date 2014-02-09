@@ -9,7 +9,10 @@ module.exports = Backbone.Collection.extend({
         options || (options = {});
         this.masters = options.masters || [];
         this.masterIndex = options.masterIndex || 0;
-        _.each(models, this.setModelMaster, this);
+        _.each(models, function (m) {
+            m.masters = this.masters;
+            m.masterIndex = this.masterIndex;
+        }, this);
     },
     comparator: function (m) {
         return this.byTotal(m);
@@ -20,16 +23,11 @@ module.exports = Backbone.Collection.extend({
     byGooley: function (m) {
         return -m.gooley;
     },
-    getMaster: function (index) {
-        index = typeof index === 'number' ? index : this.masterIndex;
-        return this.masters[index];
-    },
-    setModelsMaster: function (master) {
-        this.each(this.setModelMaster, this);
+    setModelsIndex: function (master) {
+        this.each(function (m) {
+            m.masterIndex = this.masterIndex;
+        }, this);
         this.sort();
-    },
-    setModelMaster: function (m) {
-        m.master = this.getMaster();
     },
     canRewind: function () {
         return this.masters.length > 0 && this.masterIndex > 0;
@@ -39,18 +37,18 @@ module.exports = Backbone.Collection.extend({
     },
     previous: function () {
         this.masterIndex = Math.max(0, this.masterIndex - 1);
-        this.setModelsMaster();
+        this.setModelsIndex();
     },
     next: function () {
         this.masterIndex = Math.min(this.masterIndex + 1, this.masters.length - 1);
-        this.setModelsMaster();
+        this.setModelsIndex();
     },
     first: function () {
         this.masterIndex = 0;
-        this.setModelsMaster();
+        this.setModelsIndex();
     },
     last: function () {
         this.masterIndex = this.masters.length - 1;
-        this.setModelsMaster();
+        this.setModelsIndex();
     }
 });
